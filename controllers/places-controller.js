@@ -40,7 +40,7 @@ const getPlacesByUserId = async (req, res, next) => {
 };
 
 const createPlace = async (req, res, next) => {
-    //console.log(req);
+  //console.log(req);
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return next(new Error("Invalid user input"));
