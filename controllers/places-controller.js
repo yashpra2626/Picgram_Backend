@@ -3,7 +3,7 @@ const { v4: uuidv4 } = require("uuid");
 const Place = require("../models/place");
 const User = require("../models/user");
 const mongoose = require("mongoose");
-//const mongooseUniqueValidator = require('mongoose-unique-validator');
+
 
 const getPlaceById = async (req, res, next) => {
   const placeId = req.params.pid;
