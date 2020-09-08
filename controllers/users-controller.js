@@ -26,7 +26,12 @@ const signUp = async (req, res, next) => {
   const filePath = `uploads/${uuidv4()}.${ext}`;
 
   imageFile.mv(filePath, (err) => {
+     if(err){
     console.log("FILE UPLOAD ERROR", err);
+     }
+     else{
+       console.log("Success");
+     }
   });
   try {
     existingUser = await User.findOne({ email: email });
@@ -44,7 +49,7 @@ const signUp = async (req, res, next) => {
   } catch (error) {
     return next(new Error("Could not create a User"));
   }
-
+   
   const newUser = new User({
     name,
     email,

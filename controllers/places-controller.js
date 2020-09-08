@@ -3,7 +3,7 @@ const { v4: uuidv4 } = require("uuid");
 const Place = require("../models/place");
 const User = require("../models/user");
 const mongoose = require("mongoose");
-
+const fs=require('fs');
 
 const getPlaceById = async (req, res, next) => {
   const placeId = req.params.pid;
@@ -40,7 +40,7 @@ const getPlacesByUserId = async (req, res, next) => {
 };
 
 const createPlace = async (req, res, next) => {
-  //console.log(req);
+  
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return next(new Error("Invalid user input"));
@@ -51,8 +51,13 @@ const createPlace = async (req, res, next) => {
   const ext = imageFile.name.split(".")[1];
   const filePath = `uploads/${uuidv4()}.${ext}`;
   imageFile.mv(filePath, (err) => {
+     if(err){
     console.log("FILE UPLOAD ERROR", err);
     //next(new Error(err));
+     }
+     else{
+       console.log("Success");
+     }
   });
 
   let user;
@@ -123,7 +128,7 @@ const updatePlaceById = async (req, res, next) => {
 
 const deletePlaceById = async (req, res, next) => {
   const placeId = req.params.pid;
-  let place;
+  let place; 
 
   try {
     place = await Place.findById(placeId).populate("creatorId");
@@ -155,7 +160,12 @@ const deletePlaceById = async (req, res, next) => {
   }
 
   fs.unlink(imagePath, (err) => {
+    if(err){
     console.log(err);
+    }
+    else{
+      console.log("Success");
+    }
   });
   res.json({ message: "Successfully delete the place" });
 };
