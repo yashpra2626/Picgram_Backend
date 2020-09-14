@@ -53,7 +53,6 @@ const createPlace = async (req, res, next) => {
   imageFile.mv(filePath, (err) => {
      if(err){
     console.log("FILE UPLOAD ERROR", err);
-    //next(new Error(err));
      }
      else{
        console.log("Success");
@@ -132,7 +131,7 @@ const deletePlaceById = async (req, res, next) => {
 
   try {
     place = await Place.findById(placeId).populate("creatorId");
-    //places = user.places;
+
   } catch (err) {
     return next(new Error(err.message));
   }

@@ -27,7 +27,7 @@ const signUp = async (req, res, next) => {
 
   imageFile.mv(filePath, (err) => {
      if(err){
-    console.log("FILE UPLOAD ERROR", err);
+       console.log("FILE UPLOAD ERROR", err);
      }
      else{
        console.log("Success");

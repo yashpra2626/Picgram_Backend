@@ -3,6 +3,7 @@ const router = express.Router();
 const placesController = require("../controllers/places-controller");
 const { check } = require("express-validator");
 const checkAuth = require("../middlewares/authcheck");
+
 router.get("/:pid", placesController.getPlaceById);
 
 router.get("/user/:uid", placesController.getPlacesByUserId);
@@ -18,7 +19,6 @@ router.post(
   ],
   placesController.createPlace
 );
-
 router.patch(
   "/:pid",
   [check("title").not().isEmpty(), check("description").isLength({ min: 5 })],
